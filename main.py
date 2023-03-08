@@ -47,17 +47,26 @@ def cleanData(df):
 inflationDF = cleanData(inflationDF)
 unemploymentDF = cleanData(unemploymentDF)
 
-fig1 = bcr.bar_chart_race(df=inflationDF.iloc[8:, :], title='Inflation, consumer prices (annual %)', dpi=600,
+# Selecting specific countries.
+inflationDF = inflationDF[
+    ['United States', 'China', 'Japan', 'Germany', 'United Kingdom', 'India', 'France', 'Italy', 'Canada',
+     'Korea, Rep.']]
+unemploymentDF = unemploymentDF[
+    ['United States', 'China', 'Japan', 'Germany', 'United Kingdom', 'India', 'France', 'Italy', 'Canada',
+     'Korea, Rep.']]
+
+# Create the first bar chart race.
+fig1 = bcr.bar_chart_race(df=inflationDF.iloc[8:, :], title='Inflation, consumer prices (annual %)', dpi=300,
                           steps_per_period=250, sort='desc', label_bars=True,
-                          period_length=3000, n_bars=6, interpolate_period=True, cmap='dark12',
+                          period_length=2500, interpolate_period=True, cmap='dark12',
                           filter_column_colors=True,
                           period_label={'x': .95, 'y': .5, 'ha': 'right', 'va': 'center'},
                           period_fmt='{x:.0f}', filename='inflation_bcr.mp4', bar_kwargs={'alpha': 1})
 
-# Create the second bar chart race
-fig2 = bcr.bar_chart_race(df=unemploymentDF.iloc[8:, :], n_bars=6, title='Unemployment (annual %)', dpi=600,
+# Create the second bar chart race.
+fig2 = bcr.bar_chart_race(df=unemploymentDF.iloc[8:, :], title='Unemployment (annual %)', dpi=300,
                           steps_per_period=250, sort='desc', label_bars=True,
-                          period_length=3000, interpolate_period=True, cmap='dark12', filter_column_colors=True,
+                          period_length=2500, interpolate_period=True, cmap='dark12', filter_column_colors=True,
                           period_label={'x': .95, 'y': .5, 'ha': 'right', 'va': 'center'},
                           period_fmt='{x:.0f}', filename='unemployment_bcr.mp4', bar_kwargs={'alpha': 1})
 
